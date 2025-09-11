@@ -1,0 +1,222 @@
+/* Authentication Module Styles */
+
+/* Page Layouts */
+.auth-page {
+  @apply min-h-screen bg-gray-50 flex flex-col justify-center py-12;
+}
+
+.auth-page-sm {
+  @apply sm:px-6 lg:px-8;
+}
+
+.auth-page-container {
+  @apply sm:mx-auto sm:w-full sm:max-w-md;
+}
+
+/* Headers */
+.auth-page-title {
+  @apply mt-6 text-center text-3xl font-extrabold text-gray-900;
+}
+
+.auth-page-subtitle {
+  @apply mt-2 text-center text-sm text-gray-600;
+}
+
+/* Form Containers */
+.auth-form-container {
+  @apply mt-8 sm:mx-auto sm:w-full sm:max-w-md;
+}
+
+.auth-form {
+  @apply w-full max-w-md mx-auto;
+}
+
+.auth-form-card {
+  @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4;
+}
+
+/* Form Groups */
+.form-group {
+  @apply mb-4;
+}
+
+.form-group-last {
+  @apply mb-6;
+}
+
+/* Labels */
+.form-label {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+/* Input Fields */
+.form-input {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
+}
+
+.form-input:focus {
+  @apply outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.form-input-error {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight;
+}
+
+.form-input-error:focus {
+  @apply outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+/* Textarea */
+.form-textarea {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight h-24 resize-none;
+}
+
+.form-textarea:focus {
+  @apply outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+}
+
+.btn-primary:focus {
+  @apply outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.btn-primary:disabled {
+  @apply opacity-50;
+}
+
+.btn-secondary {
+  @apply bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded;
+}
+
+.btn-secondary:focus {
+  @apply outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.btn-secondary:disabled {
+  @apply opacity-50;
+}
+
+.btn-warning {
+  @apply bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded;
+}
+
+.btn-warning:focus {
+  @apply outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.btn-warning:disabled {
+  @apply opacity-50;
+}
+
+.btn-purple {
+  @apply bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded;
+}
+
+.btn-purple:focus {
+  @apply outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.btn-purple:disabled {
+  @apply opacity-50;
+}
+
+.btn-gray {
+  @apply bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded;
+}
+
+.btn-gray:focus {
+  @apply outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.btn-full-width {
+  @apply w-full;
+}
+
+.btn-flex {
+  @apply flex-1;
+}
+
+/* Button Containers */
+.form-actions {
+  @apply flex items-center justify-between;
+}
+
+.form-actions-gap {
+  @apply flex items-center justify-between gap-4;
+}
+
+/* Links */
+.form-link {
+  @apply inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800;
+}
+
+.form-link-center {
+  @apply mt-4 text-center;
+}
+
+/* Messages */
+.error-message {
+  @apply mb-4 text-red-500 text-sm;
+}
+
+.success-message {
+  @apply mb-4 text-green-500 text-sm;
+}
+
+/* Success States */
+.success-container {
+  @apply mb-4 text-center;
+}
+
+.success-icon {
+  @apply text-green-500 text-6xl mb-4;
+}
+
+.success-title {
+  @apply text-xl font-bold text-gray-700 mb-4;
+}
+
+.success-message-text {
+  @apply text-gray-600 mb-6;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  @apply animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500;
+}
+
+.loading-container {
+  @apply flex justify-center;
+}
+
+/* Form Headers */
+.form-header {
+  @apply mb-6 text-center;
+}
+
+.form-header-title {
+  @apply text-2xl font-bold text-gray-700 mb-2;
+}
+
+.form-header-subtitle {
+  @apply text-gray-600;
+}
+
+/* Responsive Utilities */
+@media (max-width: 640px) {
+  .auth-form-card {
+    @apply px-4 pt-4 pb-6;
+  }
+  
+  .auth-page-title {
+    @apply text-2xl;
+  }
+  
+  .form-header-title {
+    @apply text-xl;
+  }
+}
