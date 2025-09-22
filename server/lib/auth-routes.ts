@@ -1,10 +1,10 @@
 export const authRoutes = {
-  login: '/login',
-  register: '/register',
-  passwordReset: '/passwdReset',
-  passwordUpdate: '/passwdupdate',
-  profile: '/profile',
-  logout: '/logout'
+  login: '/auth/login',
+  register: '/auth/register',
+  passwordReset: '/auth/passwdReset',
+  passwordUpdate: '/auth/passwdupdate',
+  profile: '/auth/profile',
+  logout: '/auth/logout'
 } as const
 
 export const protectedRoutes = [
@@ -15,10 +15,10 @@ export const protectedRoutes = [
 
 export const publicRoutes = [
   '/',
-  '/login',
-  '/register',
-  '/passwdReset',
-  '/passwdupdate'
+  '/auth/login',
+  '/auth/register',
+  '/auth/passwdReset',
+  '/auth/passwdupdate'
 ]
 
 export const authRedirects = {
@@ -38,7 +38,7 @@ export function isPublicRoute(pathname: string): boolean {
 }
 
 export function isAuthRoute(pathname: string): boolean {
-  return ['/login', '/register', '/passwdReset', '/passwdupdate'].includes(pathname)
+  return ['/auth/login', '/auth/register', '/auth/passwdReset', '/auth/passwdupdate'].includes(pathname)
 }
 
 export function getRedirectUrl(key: keyof typeof authRedirects): string {

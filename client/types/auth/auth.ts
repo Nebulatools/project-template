@@ -79,3 +79,4 @@ export type AuthAction =
   | { type: 'AUTH_LOGOUT' }
   | { type: 'CLEAR_ERROR' }
   | { type: 'UPDATE_PROFILE'; payload: Partial<User> }
+

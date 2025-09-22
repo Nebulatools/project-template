@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
-import '../styles/globals.css'
-import '../styles/styles.css'
+import '../assets/styles/globals.css'
+import '../assets/styles/styles.css'
 import { AuthProvider } from '../components/auth/AuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })

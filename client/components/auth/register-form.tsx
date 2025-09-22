@@ -52,7 +52,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
       if (onSubmit) {
         await onSubmit(formData)
       } else {
-        const response = await fetch('/api/register', {
+        const response = await fetch('/api/auth/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
         }
 
         console.log('Usuario registrado exitosamente:', data)
-        router.push('/login?message=Usuario registrado exitosamente')
+        router.push('/auth/login?message=Usuario registrado exitosamente')
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error al registrar usuario')
@@ -164,7 +164,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
         </div>
         
         <div className="form-link-center">
-          <Link href="/login" className="form-link">
+          <Link href="/auth/login" className="form-link">
             ¿Ya tienes cuenta? Inicia sesión
           </Link>
         </div>

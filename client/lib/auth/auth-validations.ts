@@ -15,23 +15,23 @@ export interface ValidationResult {
 
 export function validateEmail(email: string): ValidationError | null {
   if (!email) {
-    return { field: 'email', message: 'El correo electr�nico es requerido' }
+    return { field: 'email', message: 'El correo electrónico es requerido' }
   }
   if (!emailRegex.test(email)) {
-    return { field: 'email', message: 'El correo electr�nico no es v�lido' }
+    return { field: 'email', message: 'El correo electrónico no es válido' }
   }
   return null
 }
 
 export function validatePassword(password: string, fieldName = 'password'): ValidationError | null {
   if (!password) {
-    return { field: fieldName, message: 'La contrase�a es requerida' }
+    return { field: fieldName, message: 'La contraseña es requerida' }
   }
   if (password.length < 6) {
-    return { field: fieldName, message: 'La contrase�a debe tener al menos 6 caracteres' }
+    return { field: fieldName, message: 'La contraseña debe tener al menos 6 caracteres' }
   }
   if (password.length > 128) {
-    return { field: fieldName, message: 'La contrase�a no puede tener m�s de 128 caracteres' }
+    return { field: fieldName, message: 'La contraseña no puede tener más de 128 caracteres' }
   }
   return null
 }
@@ -44,14 +44,14 @@ export function validateName(name: string): ValidationError | null {
     return { field: 'name', message: 'El nombre debe tener al menos 2 caracteres' }
   }
   if (name.length > 100) {
-    return { field: 'name', message: 'El nombre no puede tener m�s de 100 caracteres' }
+    return { field: 'name', message: 'El nombre no puede tener más de 100 caracteres' }
   }
   return null
 }
 
 export function validatePhone(phone: string): ValidationError | null {
   if (phone && !phoneRegex.test(phone)) {
-    return { field: 'phone', message: 'El n�mero de tel�fono no es v�lido' }
+    return { field: 'phone', message: 'El número de teléfono no es válido' }
   }
   return null
 }
@@ -84,7 +84,7 @@ export function validateRegisterData(data: RegisterData): ValidationResult {
   if (passwordError) errors.push(passwordError)
   
   if (data.password !== data.confirmPassword) {
-    errors.push({ field: 'confirmPassword', message: 'Las contrase�as no coinciden' })
+    errors.push({ field: 'confirmPassword', message: 'Las contraseñas no coinciden' })
   }
   
   return {
@@ -109,18 +109,18 @@ export function validatePasswordUpdateData(data: PasswordUpdateData): Validation
   const errors: ValidationError[] = []
   
   if (!data.token && !data.currentPassword) {
-    errors.push({ field: 'currentPassword', message: 'La contrase�a actual es requerida' })
+    errors.push({ field: 'currentPassword', message: 'La contraseña actual es requerida' })
   }
   
   const newPasswordError = validatePassword(data.newPassword, 'newPassword')
   if (newPasswordError) errors.push(newPasswordError)
   
   if (data.newPassword !== data.confirmPassword) {
-    errors.push({ field: 'confirmPassword', message: 'Las contrase�as no coinciden' })
+    errors.push({ field: 'confirmPassword', message: 'Las contraseñas no coinciden' })
   }
   
   if (data.currentPassword && data.currentPassword === data.newPassword) {
-    errors.push({ field: 'newPassword', message: 'La nueva contrase�a debe ser diferente a la actual' })
+    errors.push({ field: 'newPassword', message: 'La nueva contraseña debe ser diferente a la actual' })
   }
   
   return {
@@ -142,7 +142,7 @@ export function validateProfileData(data: ProfileData): ValidationResult {
   if (phoneError) errors.push(phoneError)
   
   if (data.bio && data.bio.length > 500) {
-    errors.push({ field: 'bio', message: 'La biograf�a no puede tener m�s de 500 caracteres' })
+    errors.push({ field: 'bio', message: 'La biografía no puede tener más de 500 caracteres' })
   }
   
   return {
@@ -150,3 +150,4 @@ export function validateProfileData(data: ProfileData): ValidationResult {
     errors
   }
 }
+

@@ -1,4 +1,4 @@
-import RegisterForm from '../components/auth/register-form'
+import RegisterForm from '../../components/auth/register-form'
 
 export default function RegisterPage() {
   return (
@@ -7,9 +7,7 @@ export default function RegisterPage() {
         <h1 className="auth-page-title">
           Crear Cuenta
         </h1>
-        <p className="auth-page-subtitle">
-          Regístrate para comenzar
-        </p>
+        <p className="auth-page-subtitle">Regístrate para comenzar</p>
       </div>
 
       <div className="auth-form-container">

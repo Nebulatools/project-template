@@ -45,7 +45,7 @@ export class AuthService {
       
       if (!response.ok) {
         const error: AuthError = await response.json()
-        throw new Error(error.message || 'Error en la petici�n')
+        throw new Error(error.message || 'Error en la petición')
       }
       
       return await response.json()
@@ -181,3 +181,4 @@ export function isTokenExpired(token: string): boolean {
     return true
   }
 }
+

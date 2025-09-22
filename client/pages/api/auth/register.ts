@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { getConnection } from '../../lib/db'
-import { hashPassword, getCurrentTimestamp } from '../../lib/utils'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { getConnection } from '../../../../server/lib/db'
+import { hashPassword, getCurrentTimestamp } from '../../../../server/lib/utils'
 
 interface RegisterData {
   name: string
@@ -19,16 +19,12 @@ interface AuditData {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log('API Register called with method:', req.method)
-  console.log('Request body:', req.body)
-  
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
   }
 
   try {
     const { name, email, password }: RegisterData = req.body
-    console.log('Extracted data:', { name, email, password: '***' })
 
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'Todos los campos son requeridos' })
@@ -74,7 +70,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const auditData: AuditData = {
       aud_date: currentTimestamp,
       aud_usr: null, // No hay usuario logueado durante registro
-      aud_view: '/register',
+      aud_view: '/auth/register',
       aud_event: 'insert',
       aud_element: 'register-form-submit',
       aud_values1: null, // No hay valores previos en un insert
@@ -104,15 +100,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } catch (error) {
     console.error('Error al registrar usuario:', error)
     
-    // Log más detallado del error
-    if (error instanceof Error) {
-      console.error('Error message:', error.message)
-      console.error('Error stack:', error.stack)
-    }
-    
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return res.status(500).json({ 
       message: 'Error interno del servidor',
-      error: process.env.NODE_ENV === 'development' ? error : undefined
+      error: process.env.NODE_ENV === 'development' ? errorMessage : undefined
     })
   }
 }
+

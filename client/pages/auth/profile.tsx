@@ -1,5 +1,5 @@
-import { useAuth } from '../hooks/auth/useAuth'
-import ProfileForm from '../components/auth/profile-form'
+import { useAuth } from '../../hooks/auth/useAuth'
+import ProfileForm from '../../components/auth/profile-form'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
@@ -9,7 +9,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      router.push('/login')
+      router.push('/auth/login')
     }
   }, [isAuthenticated, isLoading, router])
 

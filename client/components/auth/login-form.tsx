@@ -80,13 +80,13 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
           >
             {isLoading ? 'Ingresando...' : 'Iniciar Sesión'}
           </button>
-          <Link href="/passwdReset" className="form-link">
+          <Link href="/auth/passwdReset" className="form-link">
             ¿Olvidaste tu contraseña?
           </Link>
         </div>
         
         <div className="form-link-center">
-          <Link href="/register" className="form-link">
+          <Link href="/auth/register" className="form-link">
             ¿No tienes cuenta? Regístrate
           </Link>
         </div>
