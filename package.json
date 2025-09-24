@@ -6,9 +6,11 @@
     "dev": "next dev client",
     "build": "next build client",
     "start": "next start client",
-    "lint": "next lint client"
+    "lint": "next lint client",
+    "init:sqlite": "node server/scripts/init-sqlite.js"
   },
   "dependencies": {
+    "better-sqlite3": "^12.4.1",
     "dotenv": "^16.5.0",
     "mysql2": "^3.14.1",
     "next": "14.2.5",

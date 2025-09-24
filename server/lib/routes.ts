@@ -1,8 +1,8 @@
 export const authRoutes = {
   login: '/login',
   register: '/register',
-  passwordReset: '/passwdReset',
-  passwordUpdate: '/passwdupdate',
+  passwordReset: '/password-reset',
+  passwordUpdate: '/password-update',
   profile: '/profile',
   logout: '/logout'
 } as const
@@ -17,8 +17,8 @@ export const publicRoutes = [
   '/',
   '/login',
   '/register',
-  '/passwdReset',
-  '/passwdupdate'
+  '/password-reset',
+  '/password-update'
 ]
 
 export const authRedirects = {
@@ -38,7 +38,7 @@ export function isPublicRoute(pathname: string): boolean {
 }
 
 export function isAuthRoute(pathname: string): boolean {
-  return ['/login', '/register', '/passwdReset', '/passwdupdate'].includes(pathname)
+  return ['/login', '/register', '/password-reset', '/password-update'].includes(pathname)
 }
 
 export function getRedirectUrl(key: keyof typeof authRedirects): string {

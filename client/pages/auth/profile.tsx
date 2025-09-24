@@ -1,5 +1,5 @@
-import { useAuth } from '../../hooks/auth/useAuth'
-import ProfileForm from '../../components/auth/profile-form'
+import { useAuth } from '../../hooks/auth/use_auth'
+import ProfileForm from '../../components/auth/profile_form'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 

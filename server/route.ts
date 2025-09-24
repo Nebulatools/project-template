@@ -1,13 +1,14 @@
-import { 
-  authRoutes, 
-  protectedRoutes, 
-  publicRoutes, 
+// Ajuste por convención camelCase en backend
+import {
+  authRoutes,
+  protectedRoutes,
+  publicRoutes,
   authRedirects,
   isProtectedRoute,
   isPublicRoute,
   isAuthRoute,
   getRedirectUrl
-} from './lib/auth-routes'
+} from './lib/authRoutes'
 
 export const appRoutes = {
   home: '/',

@@ -1,6 +1,23 @@
-import LoginForm from '../../components/auth/login-form'
+import LoginForm from '../../components/auth/login_form'
+import { useAuth } from '../../hooks/auth/use_auth'
+import { useRouter } from 'next/router'
 
 export default function LoginPage() {
+  const { login } = useAuth()
+  const router = useRouter()
+
+  const handleSubmit = async (email: string, password: string) => {
+    await login({ email, password })
+    const dashboard = '/dashboard'
+    const fallback = '/account/my-profile'
+    try {
+      const res = await fetch(dashboard, { method: 'HEAD' })
+      router.push(res.ok ? dashboard : fallback)
+    } catch {
+      router.push(fallback)
+    }
+  }
+
   return (
     <div className="auth-page auth-page-sm">
       <div className="auth-page-container">
@@ -11,7 +28,7 @@ export default function LoginPage() {
       </div>
 
       <div className="auth-form-container">
-        <LoginForm />
+        <LoginForm onSubmit={handleSubmit} />
       </div>
     </div>
   )
