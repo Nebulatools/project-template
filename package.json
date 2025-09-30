@@ -7,7 +7,7 @@
     "build": "next build client",
     "start": "next start client",
     "lint": "next lint client",
-    "init:sqlite": "node server/scripts/init-sqlite.js"
+    "init:sqlite": "node server/scripts/init_sqlite.js"
   },
   "dependencies": {
     "better-sqlite3": "^12.4.1",

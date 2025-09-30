@@ -3,8 +3,8 @@ import ProfileForm from '../../components/auth/profileForm'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-export default function ProfilePage() {
-  const { user, isAuthenticated, isLoading } = useAuth()
+export default function MyProfilePage() {
+  const { user, isAuthenticated, isLoading, updateProfile } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
@@ -40,6 +40,9 @@ export default function ProfilePage() {
 
       <div className="auth-form-container">
         <ProfileForm 
+          onSubmit={async (data) => {
+            await updateProfile(data)
+          }}
           initialData={{
             name: user.name,
             email: user.email,

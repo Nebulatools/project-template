@@ -4,32 +4,32 @@
   Qué cambié                                                                                                 
                                                                                                              
   - Convenciones de nombres:                                                                                 
-      - Backend /server en camelCase:                                                                        
-      - `server/lib/auth-routes.ts` → `server/lib/authRoutes.ts` (y ajusté imports).                         
-  - Frontend /client en snake_case:                                                                          
-      - Componentes: `login_form.tsx`, `register_form.tsx`, `profile_form.tsx`, `password_reset_form.tsx`,   
-  `password_update_form.tsx`.                                                                                
-      - Hook: `hooks/auth/use_auth.ts`.                                                                      
-      - Validaciones: `lib/auth/auth_validations.ts`.                                                        
-      - Pages: `pages/auth/password_reset.tsx`, `pages/auth/password_update.tsx`.                            
+      - Backend /server en snake_case:                                                                        
+      - `server/lib/authRoutes.ts` → `server/lib/auth_routes.ts` (y ajusté imports).                         
+  - Frontend /client en camelCase:                                                                          
+      - Componentes: `loginForm.tsx`, `registerForm.tsx`, `profileForm.tsx`, `passwordResetForm.tsx`,   
+  `passwordUpdateForm.tsx`.                                                                                
+      - Hook: `hooks/auth/useAuth.ts`.                                                                      
+      - Validaciones: `lib/auth/authValidations.ts`.                                                        
+      - Pages: `pages/auth/passwordReset.tsx`, `pages/auth/passwordUpdate.tsx`.                            
       - Actualicé todos los imports y rutas internas.                                                        
                                                                                                              
   - Rutas URL en kebab-case:                                                                                 
       - Servidor:                                                                                            
-      - `server/lib/authRoutes.ts`: `/auth/password-reset`, `/auth/password-update` y redirects a `/auth/    
+      - `server/lib/auth_routes.ts`: `/auth/password-reset`, `/auth/password-update` y redirects a `/auth/    
   login`.                                                                                                    
       - `server/lib/routes.ts`: `/password-reset`, `/password-update`.                                       
-      - `server/route.ts`: ahora importa desde `./lib/authRoutes`.                                           
+      - `server/src/routes/route.ts`: ahora importa desde `./lib/auth_routes`.                                           
   - Cliente:                                                                                                 
       - Enlace en login → `/auth/password-reset`.                                                            
       - Enlaces de “volver al login” → `/auth/login`.                                                        
       - Acción “Cambiar contraseña” en perfil → `/auth/password-update`.                                     
                                                                                                              
-  - Rewrites en Next para conciliar snake_case en archivos con rutas kebab-case:                             
+  - Rewrites en Next para conciliar camelCase en archivos con rutas kebab-case:                             
       - client/next.config.js                                                                                
       - Reescribe:                                                                                           
-        - `/auth/password-reset` → `/auth/password_reset`                                                    
-        - `/auth/password-update` → `/auth/password_update`                                                  
+        - `/auth/password-reset` → `/auth/passwordReset`                                                    
+        - `/auth/password-update` → `/auth/passwordUpdate`                                                  
                                                                                                              
   - Fallback a SQLite para pruebas sin DB:                                                                   
       - server/lib/db.ts:                                                                                    
@@ -39,14 +39,14 @@
         - `rec_audit (...)`                                                                                  
       - Mantiene compatibilidad: `execute(...)` devuelve estructuras tipo `mysql2`.                          
   - SQL de esquema: server/sql/schema.sql.                                                                   
-  - Script de init: server/scripts/init-sqlite.js.                                                           
+  - Script de init: server/scripts/init_sqlite.js.                                                           
   - env.template: añadí DB_CLIENT y SQLITE_DB_PATH.                                                          
   - package.json: script init:sqlite.                                                                        
                                                                                                              
   Impacto en el módulo auth                                                                                  
                                                                                                              
   - Las URLs expuestas por servidor y utilizadas en el cliente están alineadas con kebab-case.               
-  - El AuthProvider y el hook use_auth siguen funcionando (se ajustaron imports).                            
+  - El AuthProvider y el hook useAuth siguen funcionando (se ajustaron imports).                            
   - El flujo de registro (/api/auth/register) se mantiene; ahora puede usar SQLite si configuras             
   DB_CLIENT=sqlite.                                                                                          
                                                                                                              

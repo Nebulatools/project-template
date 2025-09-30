@@ -50,7 +50,7 @@
 - raíz
   - `package.json` (scripts apuntan a `client`)
   - `env.template` (incluye `DB_*` y `NEXT_PUBLIC_*`)
-  - `test-db-connection.js` (script de prueba con `NEXT_PUBLIC_*`)
+  - `test_db_connection.js` (script de prueba con `NEXT_PUBLIC_*`)
 
 ## Detalles de implementación
 
@@ -106,7 +106,7 @@
 ## Notas y consideraciones
 
 - Se mantuvo `server/lib/routes.ts`; no es consumido por el frontend actual y puede consolidarse o eliminarse si no se usa.
-- `test-db-connection.js` usa `NEXT_PUBLIC_*`; mantenerlo sólo para pruebas locales.
+- `test_db_connection.js` usa `NEXT_PUBLIC_*`; mantenerlo sólo para pruebas locales.
 - Asegúrate de poblar `.env` con `DB_*` para que `POST /api/auth/register` funcione.
 - Si prefieres aislar el backend de Next, se puede introducir un servidor Node/Express en `server/` y consumirlo vía `fetch` con proxy/rewrite; hoy se usa Next API por simplicidad.
 

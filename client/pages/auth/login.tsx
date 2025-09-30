@@ -1,5 +1,5 @@
-import LoginForm from '../../components/auth/login_form'
-import { useAuth } from '../../hooks/auth/use_auth'
+import LoginForm from '../../components/auth/loginForm'
+import { useAuth } from '../../hooks/auth/useAuth'
 import { useRouter } from 'next/router'
 
 export default function LoginPage() {
