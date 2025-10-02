@@ -4,8 +4,14 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-function getBackendConfig() {
-  const requiredVars = ['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASSWORD'];
+function getFrontendConfig() {
+  const requiredVars = [
+    'NEXT_PUBLIC_HOSTNAME',
+    'NEXT_PUBLIC_DATABASE',
+    'NEXT_PUBLIC_USERNAME',
+    'NEXT_PUBLIC_PASSWORD'
+  ];
+
   const missing = requiredVars.filter((variable) => !process.env[variable]);
 
   if (missing.length > 0) {
@@ -13,11 +19,11 @@ function getBackendConfig() {
   }
 
   return {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: parseInt(process.env.DB_PORT || '3306', 10),
+    host: process.env.NEXT_PUBLIC_HOSTNAME,
+    user: process.env.NEXT_PUBLIC_USERNAME,
+    password: process.env.NEXT_PUBLIC_PASSWORD,
+    database: process.env.NEXT_PUBLIC_DATABASE,
+    port: parseInt(process.env.NEXT_PUBLIC_PORT || '3306', 10),
     ssl: {
       rejectUnauthorized: false
     }
@@ -25,9 +31,9 @@ function getBackendConfig() {
 }
 
 async function testConnection() {
-  const config = getBackendConfig();
+  const config = getFrontendConfig();
 
-  console.log('🔄 Testing MySQL database connection (backend credentials)...');
+  console.log('🔄 Testing MySQL database connection (frontend credentials)...');
   console.log('📋 Configuration:');
   console.log(`   Host: ${config.host}`);
   console.log(`   Database: ${config.database}`);
@@ -56,8 +62,7 @@ async function testConnection() {
     await connection.end();
     console.log('✅ Connection closed successfully');
     console.log('');
-    console.log('🎉 Backend database connection test completed successfully!');
-    console.log('🔗 You can now use this database in your Node.js backend');
+    console.log('🎉 Frontend database connection test completed successfully!');
   } catch (error) {
     console.error('❌ Database connection failed:');
     console.error('   Error:', error.message);
@@ -65,15 +70,13 @@ async function testConnection() {
     if (error.sqlState) console.error('   State:', error.sqlState);
     console.log('');
     console.log('🔧 Troubleshooting tips:');
-    console.log('   1. Check if the database server is running');
-    console.log('   2. Verify the backend connection parameters in .env');
-    console.log('   3. Check if the database allows remote connections');
-    console.log('   4. Verify firewall settings');
-    console.log('   5. Check SSL/TLS configuration');
+    console.log('   1. Verify the frontend connection parameters in .env');
+    console.log('   2. Check if the database allows connections from public clients');
+    console.log('   3. Confirm SSL requirements match your database configuration');
   }
 }
 
 testConnection().catch((error) => {
-  console.error('Unexpected error running backend connection test:', error);
+  console.error('Unexpected error running frontend connection test:', error);
   process.exitCode = 1;
 });
