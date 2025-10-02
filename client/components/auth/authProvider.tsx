@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, ReactNode } from 'react'
+﻿import React, { useReducer, useEffect, ReactNode, useCallback, useMemo } from 'react'
 import { 
   User, 
   AuthState, 
@@ -87,7 +87,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           const currentUser = await authService.getCurrentUser()
           dispatch({ type: 'AUTH_SUCCESS', payload: currentUser })
         } catch (error) {
-          authService.logout()
+          await authService.logout({ audit: false })
           dispatch({ type: 'AUTH_LOGOUT' })
         }
       }
@@ -134,7 +134,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const logout = async (): Promise<void> => {
-    authService.logout()
+    await authService.logout()
     dispatch({ type: 'AUTH_LOGOUT' })
   }
 
@@ -215,3 +215,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return React.createElement(AuthContext.Provider, { value }, children)
 }
+
+
+
+
+

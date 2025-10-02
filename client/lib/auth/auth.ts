@@ -45,7 +45,7 @@ export class AuthService {
       
       if (!response.ok) {
         const error: AuthError = await response.json()
-        throw new Error(error.message || 'Error en la petición')
+        throw new Error(error.message || 'Error en la peticiÃƒÆ’Ã‚Â³n')
       }
       
       return await response.json()
@@ -118,11 +118,25 @@ export class AuthService {
     return response
   }
 
-  logout(): void {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem(AUTH_TOKEN_KEY)
-      localStorage.removeItem(REFRESH_TOKEN_KEY)
-      localStorage.removeItem(USER_KEY)
+  async logout(options: { audit?: boolean } = {}): Promise<void> {
+    const { audit = true } = options
+    const storedUser = this.getStoredUser()
+
+    try {
+      if (audit && storedUser?.email) {
+        await this.makeRequest('/auth/logout', {
+          method: 'POST',
+          body: JSON.stringify({ email: storedUser.email })
+        })
+      }
+    } catch (error) {
+      console.error('Error registrando logout:', error)
+    } finally {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem(AUTH_TOKEN_KEY)
+        localStorage.removeItem(REFRESH_TOKEN_KEY)
+        localStorage.removeItem(USER_KEY)
+      }
     }
   }
 
@@ -181,4 +195,8 @@ export function isTokenExpired(token: string): boolean {
     return true
   }
 }
+
+
+
+
 

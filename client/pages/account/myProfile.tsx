@@ -1,5 +1,5 @@
-import { useAuth } from '../../hooks/auth/useAuth'
-import ProfileForm from '../../components/auth/profileForm'
+﻿import { useAuth } from '../../hooks/auth/useAuth'
+import ProfileForm from '../../components/account/profileForm'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
@@ -34,7 +34,7 @@ export default function MyProfilePage() {
           Mi Perfil
         </h1>
         <p className="auth-page-subtitle">
-          Administra tu información personal
+          Administra tu informaciÃƒÂ³n personal
         </p>
       </div>
 
@@ -54,3 +54,5 @@ export default function MyProfilePage() {
     </div>
   )
 }
+
+

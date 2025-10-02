@@ -1,43 +1,60 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import { useState } from "react"
+import { useRouter } from "next/router"
+import Link from "next/link"
+import { useAuth } from "../../hooks/auth/useAuth"
 
 interface LoginFormProps {
   onSubmit?: (email: string, password: string) => Promise<void>
 }
 
 export default function LoginForm({ onSubmit }: LoginFormProps) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [localLoading, setLocalLoading] = useState(false)
+  const [error, setError] = useState("")
   const router = useRouter()
+  const { isLoading: authLoading, error: authError, clearError } = useAuth()
+
+  const combinedLoading = localLoading || authLoading
+  const combinedError = error || authError || ""
+
+  const resetErrors = () => {
+    if (error) setError("")
+    if (authError) clearError()
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
-    setError('')
+    resetErrors()
+
+    const trimmedEmail = email.trim()
+    const trimmedPassword = password.trim()
+
+    if (!trimmedEmail || !trimmedPassword) {
+      setError("Correo y contrasena son requeridos")
+      return
+    }
 
     try {
       if (onSubmit) {
-        await onSubmit(email, password)
+        await onSubmit(trimmedEmail, trimmedPassword)
       } else {
-        console.log('Login attempt:', { email, password })
-        const dashboard = '/dashboard'
-        const fallback = '/account/my-profile'
+        setLocalLoading(true)
+        const dashboard = "/dashboard"
+        const fallback = "/account/my-profile"
         try {
-          const res = await fetch(dashboard, { method: 'HEAD' })
+          const res = await fetch(dashboard, { method: "HEAD" })
           router.push(res.ok ? dashboard : fallback)
         } catch {
           router.push(fallback)
         }
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al iniciar sesión')
+      setError(err instanceof Error ? err.message : "Error al iniciar sesion")
     } finally {
-      setIsLoading(false)
+      setLocalLoading(false)
     }
   }
 
@@ -46,7 +63,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
       <form onSubmit={handleSubmit} className="auth-form-card">
         <div className="form-group">
           <label className="form-label" htmlFor="email">
-            Correo electrónico
+            Correo electronico
           </label>
           <input
             className="form-input"
@@ -54,13 +71,16 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
             type="email"
             placeholder="tu@email.com"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              resetErrors()
+              setEmail(e.target.value)
+            }}
             required
           />
         </div>
         <div className="form-group-last">
           <label className="form-label" htmlFor="password">
-            Contraseña
+            Contrasena
           </label>
           <input
             className="form-input-error"
@@ -68,14 +88,17 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
             type="password"
             placeholder="******************"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              resetErrors()
+              setPassword(e.target.value)
+            }}
             required
           />
         </div>
         
-        {error && (
+        {combinedError && (
           <div className="error-message">
-            {error}
+            {combinedError}
           </div>
         )}
         
@@ -83,18 +106,18 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
           <button
             className="btn-primary"
             type="submit"
-            disabled={isLoading}
+            disabled={combinedLoading}
           >
-            {isLoading ? 'Ingresando...' : 'Iniciar Sesión'}
+            {combinedLoading ? "Ingresando..." : "Iniciar Sesion"}
           </button>
           <Link href="/auth/password-reset" className="form-link">
-            ¿Olvidaste tu contraseña?
+            ?Olvidaste tu contrasena?
           </Link>
         </div>
         
         <div className="form-link-center">
           <Link href="/auth/register" className="form-link">
-            ¿No tienes cuenta? Regístrate
+            ?No tienes cuenta? Registrate
           </Link>
         </div>
       </form>
